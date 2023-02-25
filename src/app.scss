@@ -1,0 +1,235 @@
+@import 'vars';
+html, body {
+  box-sizing: border-box;
+  min-height: 100vh;
+}
+*, *::after, *::before {
+  box-sizing: inherit;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+  height: 60px;
+  background-color: rgba($color, .15);
+  img {
+    cursor: pointer;
+  }
+}
+.main__paragraph {
+  font-size: 20px;
+  color: $color;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 34px;
+}
+
+.main__cells, .exercises__select_wrapper {
+  margin-top: 34px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+}
+.exercises__select_wrapper__one {
+  margin-top: 34px;
+  display: flex;
+  justify-content: center;
+}
+.items__cells {
+  padding-top: 10px;
+  position: relative;
+  text-align: center;
+  font-weight: bold;
+  width: 130px;
+  height: 80px;
+  background-color: rgba($color, .15);
+  border-radius: 4px;
+  margin-bottom: 45px;
+  &__selected{
+    box-shadow: 0px 0px 8px rgba($color, 0.8);
+    background-color: rgba($color, .25);
+  }
+  &__mark {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+  }
+}
+.second__paragraph {
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+}
+.button__next {
+  min-width: 95px;
+  height: 34px;
+  border-radius: 6px;
+  background-color: $color;
+  border: none;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 14px;
+  &__disabled {
+    background-color: grey;
+  }
+}
+.footer {
+  display: flex;
+  justify-content: center;
+}
+.footerGroup {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  bottom: 0;
+  right: 40%;
+}
+
+.exercise__block__closed {
+  display: flex;
+  margin-top: 40px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  width: 324px;
+  height: 50px;
+  background-color: $color;
+  border-radius: 24px;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  transition: height 0.5s ease-in-out;
+}
+.list__edit {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+  height: 170px;
+  li {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 18px;
+    margin-top: 6px;
+    img {
+      width: 26px;
+    }
+  }
+}
+.container__ex__page, .group__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-content: stretch;
+  min-height: 90vh;
+}
+
+.footerWrapper {
+  flex: 0 1 auto;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 40px;
+}
+
+.content {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: center;
+}
+
+
+.exercise__block__open {
+  min-height: 270px;
+  display: block;
+  &__input {
+    width: 274px;
+    height: 40px;
+    font-size: 20px;
+    border-radius: 12px;
+    border: none;
+    padding: 6px;
+    padding-right: 44px;
+  }
+  &__edit__header{
+    display: flex;
+    justify-content: space-between;
+    .polygon__open {
+      fill: white;
+    }
+  }
+.tool__bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 8px 0;
+  input{
+    margin: 0 4px;
+    width: 35px;
+    height: 23px;
+    font-size: 18px;
+    border: none;
+    border-radius: 4px;
+  }
+}
+.line {
+  height: 3px;
+  border-radius: 3px;
+  background-color: white;
+}
+}
+.exs__list__wrapper{
+  overflow: auto;
+  margin-top: 4px;
+  height: 200px;
+}
+.df {
+  display: flex;
+}
+.jcc {
+  justify-content: center;
+}
+.jcspb {
+  justify-content: space-between;
+}
+
+.searching {
+  position: relative;
+}
+.searching__icon {
+  position: absolute;
+  right: 6px;
+  fill: rgb(184, 184, 184);
+  width: 32px;
+  height: 42px;
+}
+.group__container {
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+}
+.exs__list__container {
+  margin-left: 0;
+  padding-left: 0;
+  &__items {
+    list-style-type: none;
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+}
+.account__container {
+  display: flex;
+  justify-content: center;
+  min-height: 90vh;
+}
+.account__block {
+  background-color: $color;
+  width: 300px;
+  height: 330px;
+  border-radius: 22px;
+  margin-top: 60px;
+}
