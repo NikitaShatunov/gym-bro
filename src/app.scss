@@ -1,9 +1,12 @@
-@import 'vars';
-html, body {
+@import "vars";
+html,
+body {
   box-sizing: border-box;
   min-height: 100vh;
 }
-*, *::after, *::before {
+*,
+*::after,
+*::before {
   box-sizing: inherit;
 }
 .header {
@@ -12,7 +15,7 @@ html, body {
   align-items: center;
   padding: 0 30px;
   height: 60px;
-  background-color: rgba($color, .15);
+  background-color: rgba($color, 0.15);
   img {
     cursor: pointer;
   }
@@ -25,7 +28,8 @@ html, body {
   margin-top: 34px;
 }
 
-.main__cells, .exercises__select_wrapper {
+.main__cells,
+.exercises__select_wrapper {
   margin-top: 34px;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -43,12 +47,12 @@ html, body {
   font-weight: bold;
   width: 130px;
   height: 80px;
-  background-color: rgba($color, .15);
+  background-color: rgba($color, 0.15);
   border-radius: 4px;
   margin-bottom: 45px;
-  &__selected{
+  &__selected {
     box-shadow: 0px 0px 8px rgba($color, 0.8);
-    background-color: rgba($color, .25);
+    background-color: rgba($color, 0.25);
   }
   &__mark {
     position: absolute;
@@ -121,7 +125,8 @@ html, body {
     }
   }
 }
-.container__ex__page, .group__container {
+.container__ex__page,
+.group__container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -142,7 +147,6 @@ html, body {
   justify-content: center;
 }
 
-
 .exercise__block__open {
   min-height: 270px;
   display: block;
@@ -155,34 +159,34 @@ html, body {
     padding: 6px;
     padding-right: 44px;
   }
-  &__edit__header{
+  &__edit__header {
     display: flex;
     justify-content: space-between;
     .polygon__open {
       fill: white;
     }
   }
-.tool__bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 8px 0;
-  input{
-    margin: 0 4px;
-    width: 35px;
-    height: 23px;
-    font-size: 18px;
-    border: none;
-    border-radius: 4px;
+  .tool__bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 8px 0;
+    input {
+      margin: 0 4px;
+      width: 35px;
+      height: 23px;
+      font-size: 18px;
+      border: none;
+      border-radius: 4px;
+    }
+  }
+  .line {
+    height: 3px;
+    border-radius: 3px;
+    background-color: white;
   }
 }
-.line {
-  height: 3px;
-  border-radius: 3px;
-  background-color: white;
-}
-}
-.exs__list__wrapper{
+.exs__list__wrapper {
   overflow: auto;
   margin-top: 4px;
   height: 200px;
@@ -224,12 +228,302 @@ html, body {
 .account__container {
   display: flex;
   justify-content: center;
-  min-height: 90vh;
+  min-height: 85vh;
 }
 .account__block {
+  position: relative;
+  text-align: center;
   background-color: $color;
   width: 300px;
-  height: 330px;
+  height: 380px;
   border-radius: 22px;
   margin-top: 60px;
+  .avatar {
+    margin-top: 20px;
+  }
+  .settings__svg {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
+  .name {
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
+  }
+  .options {
+    width: 254px;
+    height: 30px;
+    background-color: rgba(white, 0.25);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 6px;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+    border-radius: 4px;
+  }
+  .left {
+    display: flex;
+    img {
+      margin-right: 8px;
+    }
+  }
+  .polygon {
+    transform: rotate(270deg);
+  }
+  .options__container {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.signup__container {
+  text-align: center;
+  img {
+    width: 192px;
+  }
+  .pharagraph {
+    font-size: 20px;
+    color: $color;
+    margin-top: 46px;
+    font-weight: bold;
+  }
+  input {
+    width: 340px;
+    height: 50px;
+    font-size: 20px;
+    border: 1px solid #bfbfbf;
+    border-radius: 4px;
+    margin-top: 20px;
+    padding-left: 4px;
+  }
+  .button {
+    width: 240px;
+    height: 40px;
+    background-color: $color;
+    color: white;
+    border-radius: 6px;
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .button-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+  }
+  .sideFunc {
+    font-size: 16px;
+    color: $color;
+    font-weight: bold;
+    text-decoration: underline;
+    margin-top: 40px;
+  }
+}
+.wrapper__signup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+}
+.mainParagraph {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  margin-top: 10px;
+}
+.settings__wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  .settings {
+    color: white;
+    width: 250px;
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    input {
+      width: 114px;
+      height: 24px;
+      border: none;
+      border-radius: 4px;
+    }
+    .buttons {
+      display: flex;
+      width: 114px;
+      justify-content: space-between;
+      button {
+        font-size: 14px;
+        font-weight: bold;
+        border: none;
+        background-color: white;
+        border-radius: 4px;
+      }
+    }
+  }
+}
+.button__save {
+  width: 150px;
+  height: 35px;
+  background-color: $color;
+  color: white;
+  border-radius: 6px;
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.link {
+  text-decoration: none;
+}
+.weight__container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+.weight__wrapper {
+  width: 136px;
+  height: 31px;
+  background-color: rgba($color: #000000, $alpha: .25);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 6px;
+  border-radius: 6px;
+  input {
+    width: 73px;
+    border-radius: 6px;
+    height: 31px;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+  }
+}
+.weight__values {
+  margin-top: 14px;
+  padding: 0 8px;
+  color: white;
+  display: flex;
+  font-weight: 500;
+  justify-content: space-between;
+  font-size: 14px;
+  input {
+    margin-top: 4px;
+    width: 50px;
+    height: 25px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    border: none;
+  }
+}
+.heightSVG {
+  width: 170px;
+  margin-top: 34px;
+}
+.input__height {
+  text-align: center;
+  margin-top: 10px;
+  width: 74px;
+  height: 30px;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+}
+.params__container {
+  font-size: 20px;
+  color: white;
+  font-weight: bold;
+  padding: 0 14px;
+  margin-top: 20px;
+  input {
+    width: 70px;
+    height: 24px;
+    border:none;
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    margin-right: 8px;
+  }
+  .params__cell {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+}
+.fat__input, .water__input {
+  padding: 0;
+  width: 70px;
+  height: 24px;
+  border:none;
+  border-radius: 6px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  margin-right: 8px;
+}
+
+.h2paragraph {
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: 500;
+  color: white;
+}
+.water__button {
+  border: none;
+  border-radius: 4px;
+  background-color: white;
+  padding: 0;
+  width: 26px;
+  height: 26px;
+}
+.water__inputs__container {
+  margin-top: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.bottle__water {
+  margin-top: 24px;
+  width: 120px;
+}
+.timer__wrapper {
+  display: flex;
+  background-color: $color;
+  width: 250px;
+  justify-content: center;
+  input {
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 4px;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  .dots {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0 4px;
+  }
+  button {
+    border: none;
+    border-radius: 4px;
+    margin: 0 4px;
+    font-weight: bold;
+    background-color: white;
+  }
 }

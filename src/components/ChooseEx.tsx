@@ -1,7 +1,6 @@
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useAppDispatch, useAppSelector } from "../redux/redux";
-import { removeItems } from "../redux/slices/dataSlice";
 import {
   chosedExercises,
   clearDoneExercises,
@@ -22,6 +21,7 @@ export const ChooseEx = ({ excs, onClick, props }: ChooseExIn) => {
   const dispatch = useAppDispatch();
   const filtered = data.filter((obj) => obj[0].muscle_group === excs);
   const exsArray = filtered.map((key) => key[0].exercises);
+  const [search, setSearch] = React.useState('')
   const [id, setId] = React.useState(0);
   const doneExercises = useAppSelector((state) => state.exercise.doneExercises);
   const doneExercisesArray = doneExercises.filter(
@@ -61,6 +61,10 @@ export const ChooseEx = ({ excs, onClick, props }: ChooseExIn) => {
       dispatch(clearDoneExercises(props.name))
     }
   }
+  const onChangeSearch = (value: string) => {
+    setSearch(value)
+  }
+
 
   return (
     <>
@@ -163,11 +167,12 @@ export const ChooseEx = ({ excs, onClick, props }: ChooseExIn) => {
                 <input
                   placeholder="Поиск..."
                   className="exercise__block__open__input"
+                  onChange={(e) => onChangeSearch(e.target.value)}
                 />
               </div>
               <div className="exs__list__wrapper">
                 <ul className="exs__list__container">
-                  {exsArray[0].map((obj) => (
+                  {exsArray[0].filter(obj => obj.toLowerCase().includes(search.toLowerCase())).map((obj) => (
                     <li
                       onClick={() => onClickExs(obj)}
                       className="exs__list__container__items"

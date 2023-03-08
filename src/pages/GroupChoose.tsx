@@ -25,7 +25,7 @@ export const GroupChose = () => {
         dispatch(removeChoosenGroup())
     }
     if(muscleGroup.length == 0) {
-      navigate('/')
+      navigate('/home')
     }
   },[muscleGroup])
     return(
@@ -54,7 +54,7 @@ export const GroupChose = () => {
        </div>
          }
           <div className="footerWrapper">
-        <Link to='/'>
+        <Link to='/home'>
             <button className="button__next">На главную</button>
             </Link>
             <Link to='/result'>

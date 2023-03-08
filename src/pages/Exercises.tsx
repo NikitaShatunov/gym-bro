@@ -29,7 +29,7 @@ export const Exercises = () => {
   React.useEffect(() => {
     dispatch(resetItems());
     if(muscleGroup.length === 0){
-      navigate('/')
+      navigate('/home')
     }
   }, []);
   React.useEffect(() => {

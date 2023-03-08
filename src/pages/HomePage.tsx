@@ -2,7 +2,9 @@ import { Cells } from "../components/Cells";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../redux/redux";
 import { clearMuscleGroup, removeMuscleGroup, setMuscleGroup } from "../redux/slices/exerciseSlice";
+
 import React from "react"
+import { Timer } from "../components/timer";
 export const items = [
   { Грудь: "/img/chest.svg" },
   { Бицепс: "img/biceps.svg" },
@@ -29,6 +31,7 @@ export const HomePage: React.FC = () => {
   const itemsPrev = [{ Грудь: "/img/chest.svg" }, { Бицепс: "img/biceps.svg" }, ];
   return (
     <div className="main">
+      {/* <Timer /> */}
       <div className="main__paragraph">Выбери что будешь тренировать</div>
       <div className="main__cells">
         {items.map((obj, key) => (
