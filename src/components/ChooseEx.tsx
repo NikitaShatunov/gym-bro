@@ -1,5 +1,6 @@
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
+import firebase from "../fireBase";
 import { useAppDispatch, useAppSelector } from "../redux/redux";
 import {
   chosedExercises,
@@ -9,19 +10,25 @@ import {
   setChoosedExecises,
   setDoneExercises,
 } from "../redux/slices/exerciseSlice";
+import { fetchDB } from "../utils/firebaseGet";
 interface ChooseExIn {
   excs: string | "";
   onClick?: () => void;
   props: chosedExercises;
 }
 export const ChooseEx = ({ excs, onClick, props }: ChooseExIn) => {
+
+  const mail = useAppSelector((state) => state.user.mail);
   const [isBlockOpen, setIsBlockOpen] = React.useState(false);
   const data = useAppSelector((state) => state.data.data);
+  const chosedExercises = useAppSelector(
+    (state) => state.exercise.chosedExercises
+  );
   const ref = React.useRef<HTMLDivElement>(null);
   const dispatch = useAppDispatch();
   const filtered = data.filter((obj) => obj[0].muscle_group === excs);
   const exsArray = filtered.map((key) => key[0].exercises);
-  const [search, setSearch] = React.useState('')
+  const [search, setSearch] = React.useState("");
   const [id, setId] = React.useState(0);
   const doneExercises = useAppSelector((state) => state.exercise.doneExercises);
   const doneExercisesArray = doneExercises.filter(
@@ -56,16 +63,29 @@ export const ChooseEx = ({ excs, onClick, props }: ChooseExIn) => {
     dispatch(removeDoneExercises({ ...obj, i }));
   };
   const onClickDelete = () => {
-    if(window.confirm(`Вы уверены что хотите удалить ${props.name}`)){
-      dispatch(removeChoosedExecises(props.name))
-      dispatch(clearDoneExercises(props.name))
+    if (window.confirm(`Вы уверены что хотите удалить ${props.name}`)) {
+      dispatch(removeChoosedExecises(props.name));
+      dispatch(clearDoneExercises(props.name));
     }
-  }
+  };
   const onChangeSearch = (value: string) => {
-    setSearch(value)
-  }
+    setSearch(value);
+  };
+  let arr: any = [];
+  chosedExercises.map((obj) => arr.push(obj.name));
 
-
+  React.useEffect(() => {
+    if (mail !== null) {
+      
+      if (isOpenEdited) {
+        fetchDB(mail, props.name, excs).then((data: any) => {
+          setWeight(data.weight);
+          setReps(data.reps);   
+        }
+        ).catch(err => console.log(err))
+      }
+    }
+  }, []);
   return (
     <>
       {isBlockOpen ? (
@@ -75,11 +95,10 @@ export const ChooseEx = ({ excs, onClick, props }: ChooseExIn) => {
         >
           {isOpenEdited ? (
             <div>
-              <div
-                className="exercise__block__open__edit__header"
-              >
+              <div className="exercise__block__open__edit__header">
                 <div>{props.name}</div>
-                <svg  onClick={() => onClickDelete()}
+                <svg
+                  onClick={() => onClickDelete()}
                   width="22"
                   height="22"
                   viewBox="0 0 22 22"
@@ -172,15 +191,19 @@ export const ChooseEx = ({ excs, onClick, props }: ChooseExIn) => {
               </div>
               <div className="exs__list__wrapper">
                 <ul className="exs__list__container">
-                  {exsArray[0].filter(obj => obj.toLowerCase().includes(search.toLowerCase())).map((obj) => (
-                    <li
-                      onClick={() => onClickExs(obj)}
-                      className="exs__list__container__items"
-                      key={uuidv4()}
-                    >
-                      {obj}
-                    </li>
-                  ))}
+                  {exsArray[0]
+                    .filter((obj) =>
+                      obj.toLowerCase().includes(search.toLowerCase())
+                    )
+                    .map((obj) => (
+                      <li
+                        onClick={() => onClickExs(obj)}
+                        className="exs__list__container__items"
+                        key={uuidv4()}
+                      >
+                        {arr.includes(obj) ? "" : obj}
+                      </li>
+                    ))}
                 </ul>
               </div>
             </>

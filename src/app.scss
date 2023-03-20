@@ -139,6 +139,7 @@ body {
   display: flex;
   justify-content: space-between;
   margin: 0 40px;
+  margin-top: 14px;
 }
 
 .content {
@@ -171,14 +172,6 @@ body {
     justify-content: space-between;
     align-items: center;
     margin: 8px 0;
-    input {
-      margin: 0 4px;
-      width: 35px;
-      height: 23px;
-      font-size: 18px;
-      border: none;
-      border-radius: 4px;
-    }
   }
   .line {
     height: 3px;
@@ -299,6 +292,9 @@ body {
     border-radius: 4px;
     margin-top: 20px;
     padding-left: 4px;
+  }
+  a {
+    text-decoration: none;
   }
   .button {
     width: 240px;
@@ -525,5 +521,37 @@ body {
     margin: 0 4px;
     font-weight: bold;
     background-color: white;
+  }
+}
+@media screen and (min-width: 900px) {
+  .exercise__block__open{
+    width: 430px;
+  }
+  .exercise__block__closed{
+    width: 430px;
+  }
+  .tool__bar {
+    width: 400px;
+    input {
+      margin: 0 4px;
+      width: 50px;
+      height: 23px;
+      font-size: 18px;
+      border: none;
+      border-radius: 4px;
+    }
+  }
+}
+@media screen and (max-width: 900px) {
+ 
+  .tool__bar {
+    input {
+      margin: 0 4px;
+      width: 40px;
+      height: 23px;
+      font-size: 18px;
+      border: none;
+      border-radius: 4px;
+    }
   }
 }

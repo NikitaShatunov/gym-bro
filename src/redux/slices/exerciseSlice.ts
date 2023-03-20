@@ -59,6 +59,9 @@ export const exerciseSlice = createSlice({
     removeChoosedExecises: (state, action) => {
       state.chosedExercises = state.chosedExercises.filter(chosedExercises => chosedExercises.name !== action.payload)
     },
+    clearChoosedExercises: (state) => {
+      state.chosedExercises = []
+    },
     setDoneExercises: (state, action) => {
       state.doneExercises.push(action.payload);
     },
@@ -89,6 +92,7 @@ export const {
   setDoneExercises,
   removeDoneExercises,
   removeChoosedExecises,
+  clearChoosedExercises,
   clearDoneExercises,
 } = exerciseSlice.actions;
 
