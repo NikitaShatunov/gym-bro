@@ -2,7 +2,7 @@
 html,
 body {
   box-sizing: border-box;
-  min-height: 90vh;
+  min-height: 100vh;
 }
 *,
 *::after,
@@ -143,6 +143,7 @@ a {
   justify-content: space-between;
   margin: 0 40px;
   margin-top: 14px;
+  margin-bottom: 40px;
 }
 
 .content {
