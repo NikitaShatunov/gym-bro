@@ -3,15 +3,15 @@ interface User {
   mail: null | string,
   name: string,
   id: null | number,
-  gender: null | number,
-  age: null | number,
+  gender: number,
+  age: number,
 }
 const initialState: User = {
   mail: null,
   name: '',
   id: null,
-  gender: null,
-  age: null,
+  gender: 0,
+  age: 18,
 };
 const userSlice = createSlice({
   name: "user",
