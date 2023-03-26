@@ -7,9 +7,17 @@ import {
 } from "firebase/auth";
 import { useAppDispatch, useAppSelector } from "../redux/redux";
 import { setUser } from "../redux/slices/userSlice";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { initializeApp } from "firebase/app";
 export const SignUp = () => {
+  const authErrorsCode: any = {
+    'invalid-email': '*Почта указана не верно.',
+    'wrong-password': '*Неверный пароль.',
+    'weak-password': '*Слабый пароль.',
+    'internal-error': '*Заполните поля.',
+    'user-not-found': '*Пользователь не найден.'
+  }
+  const [authStatus, setAuthStatus] = React.useState('')
   const [isReg, setIsReg] = React.useState(false);
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState("");
@@ -23,17 +31,19 @@ export const SignUp = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         dispatch(setUser(user.email));
+        navigate('/home')
       })
       .catch((error) => {
-        const errorCode = error.code;
         const errorMessage = error.message;
+        setAuthStatus(errorMessage.split('/')[1].split(').')[0]);
       });
   };
   React.useEffect(() => {
     if(mail !== null){
       navigate('/home')
     }
-  },[mail])
+    
+  },[mail, authStatus])
   const handleClickRegistration = (email: string, password: string) => {
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
@@ -41,13 +51,16 @@ export const SignUp = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         dispatch(setUser(user.email));
+        navigate('/home')
       })
-      .catch((error) => {
-        const errorCode = error.code;      
+      .catch((error) => {     
         const errorMessage = error.message;
-        alert(errorMessage)
+        setAuthStatus(errorMessage.split('/')[1].split(').')[0])
       });
   };
+
+
+
   return (
     <div className="wrapper__signup">
       <div className="signup__container">
@@ -58,10 +71,11 @@ export const SignUp = () => {
             <input placeholder="email" type="text"  onChange={(e) => setEmail(e.target.value)}/>
             <br />
             <input placeholder="password" type="password" onChange={(e) => setPassword(e.target.value)}/>
+            {Boolean(authStatus) && <p style={{color: 'red', textAlign: 'left'}}>{authErrorsCode[authStatus]}</p>}
             <div className="button-wrapper">
-              <Link to='/home'><div className="button" onClick={() => {handleClickRegistration(email, password)}}>РЕГИСТРАЦИЯ</div></Link>
+              <div className="button" onClick={() => {handleClickRegistration(email, password)}}>РЕГИСТРАЦИЯ</div>
             </div>
-            <div onClick={() => {setIsReg(false); setEmail(''); setPassword('')}} className="sideFunc">
+            <div onClick={() => {setIsReg(false); setEmail(''); setPassword(''); setAuthStatus('')}} className="sideFunc">
               ВХОД
             </div>
           </div>
@@ -73,10 +87,11 @@ export const SignUp = () => {
             <input placeholder="email" type="text" onChange={(e) => setEmail(e.target.value)}/>
             <br />
             <input placeholder="password" type="password" onChange={(e) => setPassword(e.target.value)}/>
+            {Boolean(authStatus) && <p style={{color: 'red', textAlign: 'left'}}>{authErrorsCode[authStatus]}</p>}
             <div className="button-wrapper">
-              <Link to='/home'><div className="button" onClick={() => handleClickSignUp(email, password)}>ВОЙТИ</div></Link>
+              <div className="button" onClick={() => handleClickSignUp(email, password)}>ВОЙТИ</div>
             </div>
-            <div onClick={() => {setIsReg(true); setEmail(''); setPassword('')}} className="sideFunc">
+            <div onClick={() => {setIsReg(true); setEmail(''); setPassword(''); setAuthStatus('') }} className="sideFunc">
               ИЛИ ЗАРЕГЕСТРИРУЙСЯ
             </div>
           </>

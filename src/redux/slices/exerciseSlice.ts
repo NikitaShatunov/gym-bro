@@ -76,6 +76,13 @@ export const exerciseSlice = createSlice({
     },
     clearDoneExercises: (state, action) => {
       state.doneExercises = state.doneExercises.filter(doneExercises => doneExercises.name !== action.payload)
+    },
+    clearStateExercises: (state) => {
+      state.choosenGroup = ''
+      state.chosedExercises = []
+      state.doneExercises = []
+      state.doneGroup = []
+      state.muscleGroup = []
     }
   },
 });
@@ -94,6 +101,7 @@ export const {
   removeChoosedExecises,
   clearChoosedExercises,
   clearDoneExercises,
+  clearStateExercises,
 } = exerciseSlice.actions;
 
 export default exerciseSlice.reducer;

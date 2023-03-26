@@ -9,6 +9,9 @@ body {
 *::before {
   box-sizing: inherit;
 }
+a {
+  text-decoration: none;
+}
 .header {
   display: flex;
   justify-content: space-between;
@@ -239,6 +242,11 @@ body {
     right: 10px;
     top: 10px;
   }
+  .exit__svg {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+  }
   .name {
     font-size: 20px;
     color: white;
@@ -327,7 +335,7 @@ body {
   align-items: center;
   height: 90vh;
 }
-.mainParagraph {
+.mainParagraph, .clear__button {
   font-size: 20px;
   font-weight: bold;
   color: white;
@@ -376,6 +384,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  text-decoration: none;
 }
 .link {
   text-decoration: none;
@@ -493,8 +502,10 @@ body {
   align-items: center;
 }
 .bottle__water {
+  position: relative;
   margin-top: 24px;
   width: 120px;
+  z-index: 1000;
 }
 .timer__wrapper {
   display: flex;
@@ -553,5 +564,37 @@ body {
       border: none;
       border-radius: 4px;
     }
+  }
+}
+.water__layer {
+  position: absolute;
+  z-index: 1;
+  left: 128px;
+  width: 44px;
+  max-height: 90px;
+  bottom: 75px;
+  border-radius: 0 0 8px 8px;
+  background-color: aqua;
+}
+.result__container {
+  text-align: center;
+  .result__logo {
+    margin-top: 150px;
+    width: 250px;
+  }
+  .button {
+    margin-top: 290px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 140px;
+    height: 40px;
+    background-color: $color;
+    color: white;
+    border-radius: 6px;
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }

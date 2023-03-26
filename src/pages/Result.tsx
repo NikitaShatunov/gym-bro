@@ -1,7 +1,9 @@
-import { addDoc, collection, doc, getDocs, getFirestore, limit, orderBy, query, setDoc, where } from "firebase/firestore";
+import { addDoc, collection, getFirestore } from "firebase/firestore";
 import React from "react"
+import { Link } from "react-router-dom";
 import firebase from "../fireBase";
-import { useAppSelector } from "../redux/redux"
+import { useAppDispatch, useAppSelector } from "../redux/redux"
+import { setDate } from "../redux/slices/dateSLice";
 
 export interface Exercise {
     name: string;
@@ -13,14 +15,14 @@ export interface Exercise {
  
   
 export const Result = () => {
-  const [result, setResult] = React.useState<Exercise[]>([]);
   const doneExercises = useAppSelector(state => state.exercise.doneExercises);
   const mail = useAppSelector(state => state.user.mail);
+  const dispatch = useAppDispatch()
   const date = new Date();
   
   React.useEffect(() => {
     const db = getFirestore(firebase);
-    
+    dispatch(setDate(date.toLocaleString().split(', ')[0]))
     if (mail !== null) {
       
       doneExercises.forEach(exercise => {
@@ -39,8 +41,10 @@ export const Result = () => {
  
   
     return(
-        <>
-        <div className="main__paragraph">Сегодня Вы сделали:</div>
-        </>
+        <div className="result__container">
+        <div className="main__paragraph">Молодец, ты хорошо поработал!</div>
+        <img className="result__logo" src="/img/logo.svg" alt="logo" />
+        <Link to='/'><div className="button">Главная</div></Link>
+        </div>
     )
 }
