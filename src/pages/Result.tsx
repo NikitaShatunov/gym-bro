@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import firebase from "../fireBase";
 import { useAppDispatch, useAppSelector } from "../redux/redux"
 import { setDate } from "../redux/slices/dateSLice";
+import { clearStateExercises } from "../redux/slices/exerciseSlice";
 
 export interface Exercise {
     name: string;
@@ -28,16 +29,14 @@ export const Result = () => {
       doneExercises.forEach(exercise => {
         const userExercisesRef = collection(db, "users", mail, `${exercise.type}`);
         addDoc(userExercisesRef, {date: date.toLocaleString().split(', ')[0], ...exercise})
-          .then(() => {
-            console.log("Exercise added to Firestore:", exercise);
-          })
-          .catch(error => {
-            console.error("Error adding exercise to Firestore:", error);
-          });
       });
-    
     }
   }, [doneExercises, mail]);
+  React.useEffect(() => {
+    setTimeout(() => {
+      dispatch(clearStateExercises())
+    }, 2000);
+  },[])
  
   
     return(

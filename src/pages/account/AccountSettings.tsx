@@ -22,12 +22,7 @@ export const AccountSettings = () => {
     if (mail !== null && name !== null && age !== null && gender !== null) {
       const userExercisesRef = doc(db, "users-props", mail);
       setDoc(userExercisesRef, { name: nameState, age: ageState, gender: genderState })
-        .then(() => {
-          console.log("User`s information added to Firestore:", name, age, gender);
-        })
-        .catch((error) => {
-          console.error("Error adding information to Firestore:", error);
-        });
+     
   };
 }
   return (

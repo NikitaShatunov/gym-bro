@@ -56,8 +56,11 @@ export const ChooseEx = ({ excs, onClick, props }: ChooseExIn) => {
     dispatch(setChoosedExecises({ name, type: excs, weight }));
   };
   const onClickAdd = (name: string) => {
-    setId(id + 1);
+    if(weight !== 0 && reps !== 0){
+      setId(id + 1);
     dispatch(setDoneExercises({ name, type: excs, weight, reps, id }));
+    }
+    
   };
   const onClickRemove = (obj: chosedExercises, i: number) => {
     dispatch(removeDoneExercises({ ...obj, i }));
@@ -82,7 +85,7 @@ export const ChooseEx = ({ excs, onClick, props }: ChooseExIn) => {
           setWeight(data.weight);
           setReps(data.reps);   
         }
-        ).catch(err => console.log(err))
+        ).catch(err => err)
       }
     }
   }, []);

@@ -13,6 +13,7 @@ import React from "react";
 import { fireBaseGetUser } from "../utils/fireBaseGetUser";
 import { setAge, setGender, setName } from "../redux/slices/userSlice";
 import { clearWaterState } from "../redux/slices/sideSlice";
+import { setDate } from "../redux/slices/dateSLice";
 
 export const items = [
   { Грудь: "/img/chest.svg" },
@@ -47,6 +48,7 @@ export const HomePage: React.FC = () => {
     if (dateValue !== date.toLocaleString().split(", ")[0]) {
       dispatch(clearStateExercises());
       dispatch(clearWaterState());
+      dispatch(setDate(date.toLocaleString().split(", ")[0]))
     }
   }, [email]);
 
