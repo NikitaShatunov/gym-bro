@@ -9,6 +9,6 @@ export const fireBaseGetUser = async (email: string) => {
   if (docSnap.exists()) {
     return docSnap.data();
   } else {
-    console.log("No such document!");
+    alert("No such document!");
   }
 };
