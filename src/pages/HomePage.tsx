@@ -14,10 +14,11 @@ import { fireBaseGetUser } from "../utils/fireBaseGetUser";
 import { setAge, setGender, setName } from "../redux/slices/userSlice";
 import { clearWaterState } from "../redux/slices/sideSlice";
 import { setDate } from "../redux/slices/dateSLice";
+import { fireBaseGetPrevGroup } from "../utils/fireBaseGetPrevGroup";
 
 export const items = [
   { Грудь: "/img/chest.svg" },
-  { Бицепс: "img/biceps.svg" },
+  { Бицепс: "/img/biceps.svg" },
   { Спина: "/img/back.svg" },
   { Трицепс: "/img/triceps.svg" },
   { Ноги: "/img/legs.svg" },
@@ -30,7 +31,7 @@ export const HomePage: React.FC = () => {
   const navigate = useNavigate();
   const muscleGroup = useAppSelector((state) => state.exercise.muscleGroup);
   const email = useAppSelector((state) => state.user.mail);
-
+  const [prevGroup, setPrevGroup] = React.useState([]);
   const onClickCell = (name: string) => {
     if (muscleGroup.includes(name)) {
       dispatch(removeMuscleGroup(name));
@@ -72,11 +73,21 @@ export const HomePage: React.FC = () => {
           }
         }
       });
+      const prevGroupPromise = fireBaseGetPrevGroup(email);
+prevGroupPromise.then((data: any) => {
+  if (data) {
+    setPrevGroup(Object.values(data))
+  }
+});
     }
     dispatch(clearStateExercises());
+    
   }, [email]);
+  React.useEffect(() => {
+  
+  },[prevGroup])
 
-  const itemsPrev = [{ Грудь: "/img/chest.svg" }, { Бицепс: "img/biceps.svg" }];
+
   return (
     <div className="main">
       <div className="main__paragraph">Выбери что будешь тренировать</div>
@@ -92,11 +103,11 @@ export const HomePage: React.FC = () => {
       </div>
       <div className="second__paragraph">На прошлой тренировке были:</div>
       <div className="main__cells">
-        {itemsPrev.map((obj, key) => (
+        {prevGroup.map((obj, key) => (
           <Cells
             key={key}
-            name={Object.keys(obj)[0]}
-            src={Object.values(obj)[0]}
+            name={obj}
+            src={Object.values(items.filter(key => Object.keys(key) == obj)[0]).toString()}
           />
         ))}
       </div>

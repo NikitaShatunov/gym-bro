@@ -36,8 +36,8 @@ export const Water = () => {
           <div className="h2paragraph">Выпил мл: </div>
           <div className="water__inputs__container">
             <input
-            value={portionWater}
-              onChange={(e) => setPortionlWater(+e.target.value)}
+            defaultValue={portionWater}
+              onChange={(e) => setPortionlWater(Number(e.target.value))}
               className="water__input"
               type="number"
             />

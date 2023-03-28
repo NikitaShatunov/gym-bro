@@ -20,8 +20,8 @@ export const AccountSettings = () => {
     dispatch(setGender(gender));
     const db = getFirestore(firebase);
     if (mail !== null && name !== null && age !== null && gender !== null) {
-      const userExercisesRef = doc(db, "users-props", mail);
-      setDoc(userExercisesRef, { name: nameState, age: ageState, gender: genderState })
+      const userPropertiesRef = doc(db, "users-props", mail);
+      setDoc(userPropertiesRef, { name: nameState, age: ageState, gender: genderState })
      
   };
 }

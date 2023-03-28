@@ -45,7 +45,7 @@ export const Account = () => {
         }
       });
     }
-  }, [name]);
+  }, [name, gender, name]);
 const onClickExit = () => {
   if(window.confirm("Вы хотите выйти?")){
     dispatch(removeUser())

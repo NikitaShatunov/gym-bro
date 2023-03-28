@@ -1,4 +1,4 @@
-import { addDoc, collection, getFirestore } from "firebase/firestore";
+import { addDoc, collection, doc, getFirestore, setDoc } from "firebase/firestore";
 import React from "react"
 import { Link } from "react-router-dom";
 import firebase from "../fireBase";
@@ -18,6 +18,7 @@ export interface Exercise {
 export const Result = () => {
   const doneExercises = useAppSelector(state => state.exercise.doneExercises);
   const mail = useAppSelector(state => state.user.mail);
+  const muscleGroup = useAppSelector(state => state.exercise.muscleGroup)
   const dispatch = useAppDispatch()
   const date = new Date();
   
@@ -25,7 +26,10 @@ export const Result = () => {
     const db = getFirestore(firebase);
     dispatch(setDate(date.toLocaleString().split(', ')[0]))
     if (mail !== null) {
-      
+        if(muscleGroup.length !== 0) {
+          const userExercisesRef = doc(db, "prev-groups", mail);
+          setDoc(userExercisesRef, {...muscleGroup})
+        }
       doneExercises.forEach(exercise => {
         const userExercisesRef = collection(db, "users", mail, `${exercise.type}`);
         addDoc(userExercisesRef, {date: date.toLocaleString().split(', ')[0], ...exercise})
