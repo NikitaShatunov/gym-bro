@@ -18,7 +18,7 @@ export const Account = () => {
     ["weight", "Мой вес"],
     ["height", "Мой рост"],
     ["params", "Мои параметры"],
-    ["fat", "Процент жира"],
+    // ["fat", "Процент жира"],
     ["water", "Счетчик воды"],
   ];
   React.useEffect(() => {

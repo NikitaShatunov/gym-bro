@@ -50,8 +50,8 @@ export const AccountSettings = () => {
                 <div className="settings">
                   <div>Пол:</div>
                   <div className="buttons">
-                    <button onClick={() => setGenderState(1)}>МУЖ</button>
-                    <button onClick={() => setGenderState(0)}>ЖЕН</button>
+                    <button style={genderState ? {backgroundColor: 'lightgrey'} : {}} onClick={() => setGenderState(1)}>МУЖ</button>
+                    <button style={!genderState ? {backgroundColor: 'lightgrey'} : {}} onClick={() => setGenderState(0)}>ЖЕН</button>
                   </div>
                 </div>
               </div>
