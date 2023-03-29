@@ -74,9 +74,11 @@ export const Weight = () => {
       const newWeight: any = { [date]: currentWeight }
       setPrevWeightArray([newWeight])
     }
-    setTimeout(() => {
-      navigate('/account')
-    }, 100);
+    if(goalWeight && currentWeight){
+      setTimeout(() => {
+        navigate('/account')
+      }, 100);
+    }
   }
   };
   
@@ -87,11 +89,12 @@ export const Weight = () => {
       setDoc(userPropertiesRef, { prevArray: [...prevArray], currentWeight, goalWeight })
         .then(() => console.log("Document successfully written!"))
         .catch((error) => console.error("Error writing document: ", error))
-    }
+    
     if(prevArray.length !== 0){
       const initial: any = (Object.values(prevArray[0])[0])
       setInitialWeight(initial)
     }
+  }
   }, [prevArray, goalWeightValue]);
   return (
     <>

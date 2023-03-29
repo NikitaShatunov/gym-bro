@@ -54,7 +54,7 @@ export const Exercises = () => {
     <>
       {" "}
       {loading ? (
-       <ExercisesSceleton />
+       <div className="sceleton__loader"><ExercisesSceleton /></div>
       ) : (
         <div className="container__ex__page">
           <div className="content">
