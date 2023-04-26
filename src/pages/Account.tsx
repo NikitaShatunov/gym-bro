@@ -12,8 +12,7 @@ export const Account = () => {
   const email = useAppSelector((state) => state.user.mail);
   const dispatch = useAppDispatch();
   const navigate = useNavigate()
-  const date = new Date();
-  const dateValue = useAppSelector(state => state.dateSlice.date) 
+  
   const options = [
     ["weight", "Мой вес"],
     ["height", "Мой рост"],
@@ -22,9 +21,6 @@ export const Account = () => {
     ["water", "Счетчик воды"],
   ];
   React.useEffect(() => {
-    if(dateValue !== (date.toLocaleString().split(', ')[0])){
-      navigate('/')
-    }
     if (email) {
       const data = fireBaseGetUser(email);
       data.then((res) => {

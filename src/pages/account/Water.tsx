@@ -27,7 +27,7 @@ export const Water = () => {
           <div className="h2paragraph">Нужно выпить мл: </div>
           <div className="water__inputs__container">
             <input
-            value={goal}
+            placeholder={String(goal)}
               onChange={(e) => (dispatch(setGoal(+e.target.value)))}
               className="water__input"
              
@@ -36,7 +36,7 @@ export const Water = () => {
           <div className="h2paragraph">Выпил мл: </div>
           <div className="water__inputs__container">
             <input
-            defaultValue={portionWater}
+            placeholder={String(portionWater)}
               onChange={(e) => setPortionlWater(Number(e.target.value))}
               className="water__input"
               type="number"

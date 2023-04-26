@@ -141,13 +141,13 @@ export const ChooseEx = ({ excs, onClick, props }: ChooseExIn) => {
               <div className="tool__bar">
                 <div>Вес</div>
                 <input
-                  defaultValue={weight}
+                placeholder={String(weight)}
                   onChange={(e) => setWeight(Number(e.target.value))}
                   type="number"
                 />
                 <div>Повторения</div>
                 <input
-                  defaultValue={reps}
+                  placeholder={String(reps)}
                   onChange={(e) => setReps(Number(e.target.value))}
                   type="number"
                 />

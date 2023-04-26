@@ -111,7 +111,7 @@ export const Weight = () => {
                 alt="minus"
               />
               <input
-                value={currentWeight}
+              placeholder={String(currentWeight)}
                 onChange={(e) => setCurrentWeight(+e.target.value)}
                 type="number"
               />
