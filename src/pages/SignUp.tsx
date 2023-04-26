@@ -92,7 +92,7 @@ export const SignUp = () => {
               <div className="button" onClick={() => handleClickSignUp(email, password)}>ВОЙТИ</div>
             </div>
             <div onClick={() => {setIsReg(true); setEmail(''); setPassword(''); setAuthStatus('') }} className="sideFunc">
-              ИЛИ ЗАРЕГЕСТРИРУЙСЯ
+              ИЛИ ЗАРЕГИСТРИРУЙСЯ
             </div>
           </>
         )}

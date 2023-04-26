@@ -17,8 +17,6 @@ export const Exercises = () => {
   const exercises = useAppSelector((state) => state.exercise.chosedExercises);
   const filteredExecises = exercises.filter((obj) => obj.type === chosenGroup);
   const navigate = useNavigate()
-  const dateValue = useAppSelector(state => state.dateSlice.date) 
-  const date = new Date();
   let arr: number[] = [];
   for (
     let i = 0;
@@ -32,9 +30,7 @@ export const Exercises = () => {
     if(muscleGroup.length === 0){
       navigate('/home')
     }
-    if(dateValue !== (date.toLocaleString().split(', ')[0])){
-      navigate('/')
-    }
+
   }, []);
   React.useEffect(() => {
     if (!didMounted.current) {

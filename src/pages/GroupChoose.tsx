@@ -10,8 +10,6 @@ export const GroupChose = () => {
     const filteredItems = items.filter((item) =>
     muscleGroup.includes(Object.keys(item)[0])
   );
-  const dateValue = useAppSelector(state => state.dateSlice.date) 
-  const date = new Date();
   const [isChoosed, setIsChoosed] = React.useState( muscleGroup.length > 1 ? true : false)
   const dispatch = useAppDispatch();
   const navigate = useNavigate()
@@ -21,9 +19,6 @@ export const GroupChose = () => {
     dispatch(setChoosenGroup(name))
   };
   React.useEffect(() => {
-    if(dateValue !== (date.toLocaleString().split(', ')[0])){
-      navigate('/')
-    }
     if(choosenGroup.length){
         dispatch(removeChoosenGroup())
     }

@@ -84,7 +84,7 @@ export const Pararms = () => {
               <div>Грудь:</div>
               <div>
                 <input
-                value={chest}
+               placeholder={String(chest)}
                   onChange={(e) => setChest(+e.target.value)}
                   type="number"
                 />
@@ -95,7 +95,7 @@ export const Pararms = () => {
               <div>Шея:</div>
               <div>
                 <input
-                value={neck}
+               placeholder={String(neck)}
                   onChange={(e) => setNeck(+e.target.value)}
                   type="number"
                 />
@@ -106,7 +106,7 @@ export const Pararms = () => {
               <div>Запястье:</div>
               <div>
                 <input
-                value={wrist}
+               placeholder={String(wrist)}
                   onChange={(e) => setWrist(+e.target.value)}
                   type="number"
                 />
@@ -117,7 +117,7 @@ export const Pararms = () => {
               <div>Бицепс:</div>
               <div>
                 <input
-                value={biceps}
+               placeholder={String(biceps)}
                   onChange={(e) => setBiceps(+e.target.value)}
                   type="number"
                 />
@@ -128,7 +128,7 @@ export const Pararms = () => {
               <div>Талия:</div>
               <div>
                 <input
-                value={waist}
+               placeholder={String(waist)}
                   onChange={(e) => setWaist(+e.target.value)}
                   type="number"
                 />
@@ -139,7 +139,7 @@ export const Pararms = () => {
               <div>Предплечья:</div>
               <div>
                 <input
-                value={forearms}
+               placeholder={String(forearms)}
                   onChange={(e) => setForearms(+e.target.value)}
                   type="number"
                 />
@@ -150,7 +150,7 @@ export const Pararms = () => {
               <div>Бёдра:</div>
               <div>
                 <input
-                value={hips}
+               placeholder={String(hips)}
                   onChange={(e) => setHips(+e.target.value)}
                   type="number"
                 />
