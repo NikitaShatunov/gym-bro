@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import firebase from "../../fireBase";
 import { useAppSelector } from "../../redux/redux";
 import { fireBaseGetWeight } from "../../utils/fireBaseGetWeight";
+import { ChartComponent } from "../../components/ChartComponent";
 
 export const Weight = () => {
   const [currentWeight, setCurrentWeight] = React.useState(0);
@@ -15,7 +16,8 @@ export const Weight = () => {
   const ref = React.useRef<HTMLDivElement>(null);
   const mail = useAppSelector((state) => state.user.mail);
   const date = useAppSelector((state) => state.dateSlice.date);
-  const navigate = useNavigate()
+
+  const navigate = useNavigate();
   React.useEffect(() => {
     const clickOutside = (event: MouseEvent) => {
       let path = event.composedPath().includes(ref.current as Node);
@@ -27,74 +29,75 @@ export const Weight = () => {
     return () => {
       document.removeEventListener("click", clickOutside);
     };
-   
   }, []);
   React.useEffect(() => {
-    if(mail !== null){
+    if (mail !== null) {
       const prevWeightPromise = fireBaseGetWeight(mail);
       prevWeightPromise.then((data: any) => {
         if (data) {
           for (const key in data) {
             switch (key) {
               case "currentWeight":
-                (setCurrentWeight(data[key]));
+                setCurrentWeight(data[key]);
                 break;
               case "goalWeight":
-                (setGoalWeight(data[key]));
+                setGoalWeight(data[key]);
                 break;
               case "prevArray":
-                (setPrevWeightArray(data[key])); 
+                setPrevWeightArray(data[key]);
                 break;
               default:
                 break;
             }
           }
         }
-      })  
+      });
     }
-    
-  },[])
-  React.useEffect(() => {
-
-  },[initialWeight])
+  }, []);
+  React.useEffect(() => {}, [initialWeight]);
   const onClickGoalWeight = () => {
     setIsPopUpShown(true);
   };
   const onClickSave = () => {
-    setGoalWeightValue(goalWeight)
-   if(currentWeight !== 0) {
-    if (prevArray.length !== 0) {
-      if (currentWeight !== Object.values(prevArray[prevArray.length - 1])[0]) {
+    setGoalWeightValue(goalWeight);
+    if (currentWeight !== 0) {
+      if (prevArray.length !== 0) {
+        if (
+          currentWeight !== Object.values(prevArray[prevArray.length - 1])[0]
+        ) {
+          const newWeight: any = { [date]: currentWeight };
+          setPrevWeightArray((prevArray: any) => [...prevArray, newWeight]);
+        }
+      } else {
         const newWeight: any = { [date]: currentWeight };
-        setPrevWeightArray((prevArray: any) => [...prevArray, newWeight])
+        setPrevWeightArray([newWeight]);
+      }
+      if (goalWeight && currentWeight) {
+        setTimeout(() => {
+          navigate("/account");
+        }, 100);
       }
     }
-   
-    else {
-      const newWeight: any = { [date]: currentWeight }
-      setPrevWeightArray([newWeight])
-    }
-    if(goalWeight && currentWeight){
-      setTimeout(() => {
-        navigate('/account')
-      }, 100);
-    }
-  }
   };
-  
+
   React.useEffect(() => {
     const db = getFirestore(firebase);
     if (mail !== null && currentWeight !== 0 && goalWeight !== 0) {
       const userPropertiesRef = doc(db, "users-weight", mail);
-      setDoc(userPropertiesRef, { prevArray: [...prevArray], currentWeight, goalWeight })
+      setDoc(userPropertiesRef, {
+        prevArray: [...prevArray],
+        currentWeight,
+        goalWeight,
+      })
         .then(() => console.log("Document successfully written!"))
-        .catch((error) => console.error("Error writing document: ", error))
-    
-    if(prevArray.length !== 0){
-      const initial: any = (Object.values(prevArray[0])[0])
-      setInitialWeight(initial)
+        .catch((error) => console.error("Error writing document: ", error));
+
+      if (prevArray.length !== 0) {
+        const initial: any = Object.values(prevArray[0])[0];
+        setInitialWeight(initial);
+      }
     }
-  }
+    
   }, [prevArray, goalWeightValue]);
   return (
     <>
@@ -111,7 +114,7 @@ export const Weight = () => {
                 alt="minus"
               />
               <input
-              placeholder={String(currentWeight)}
+                placeholder={String(currentWeight)}
                 onChange={(e) => setCurrentWeight(+e.target.value)}
                 type="number"
               />
@@ -137,7 +140,7 @@ export const Weight = () => {
               {
                 <div className={isPopUpShown ? "pop-up-weight" : "pop_up_hide"}>
                   <input
-                  placeholder={`${goalWeight}`}
+                    placeholder={`${goalWeight}`}
                     onChange={(e) => setGoalWeight(+e.target.value)}
                     type="number"
                   />
@@ -145,10 +148,22 @@ export const Weight = () => {
               }
             </div>
           </div>
+          <div style={{ marginTop: "24px" }}>
+            <ChartComponent
+              propsValue={prevArray.slice(prevArray.length - 6).map(
+                (obj: { [key: string]: any }): any => Object.values(obj)[0]
+              )}
+              propsLabels={prevArray.slice(prevArray.length - 6).map((obj: { [key: string]: any }): any =>
+                Object.keys(obj)[0].split(".").splice(0, 2).join(".")
+              )}
+            />
+          </div>
         </div>
       </div>
       <div className="footer">
-        <div className="button__save" onClick={() => onClickSave()}>СОХРАНИТЬ</div>
+        <div className="button__save" onClick={() => onClickSave()}>
+          СОХРАНИТЬ
+        </div>
       </div>
     </>
   );
